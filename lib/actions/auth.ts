@@ -48,7 +48,7 @@ export const signUp = async (params: AuthCredintials) => {
     return { success: false, error: "User already exists" };
   }
   await workflowClient.trigger({
-    url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
+    url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
     body: {
       email,
       fullName,
