@@ -16,7 +16,8 @@ const {
 const authenticator = async () => {
   try {
     const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
-
+    const text = await response.text();
+    console.log("Response Text:", text);
     if (!response.ok) {
       const errorText = await response.text();
 
@@ -25,7 +26,7 @@ const authenticator = async () => {
       );
     }
 
-    const data = await response.json();
+    const data = JSON.parse(text);
 
     const { signature, expire, token } = data;
 
@@ -157,14 +158,14 @@ const FileUpload = ({
       {file &&
         (type === "image" ? (
           <IKImage
-            alt={file.filePath}
-            path={file.filePath}
+            alt={file.filePath ?? ""}
+            path={file.filePath ?? undefined}
             width={500}
             height={300}
           />
         ) : type === "video" ? (
           <IKVideo
-            path={file.filePath}
+            path={file.filePath ?? undefined}
             controls={true}
             className="h-96 w-full rounded-xl"
           />

@@ -11,11 +11,11 @@ import { redirect } from "next/navigation";
 import { workflowClient } from "../workflow";
 import config from "../config";
 
-export const signInWithCredentials = async (
+export const signInWithCredintials = async (
   params: Pick<AuthCredintials, "email" | "password">
 ) => {
   const { email, password } = params;
-  const ip = (await headers()).get("x-forwards-for") || "127.0.0.1";
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
   const { success } = await ratelimit.limit(ip);
   if (!success) return redirect("/too-fast");
   try {

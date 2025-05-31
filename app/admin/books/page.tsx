@@ -6,7 +6,7 @@ import { users } from "@/database/schema";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
-
+import DataTableDemo from "@/components/admin/TableBooks";
 
 const page = async () => {
   const session = await auth();
@@ -22,6 +22,7 @@ const page = async () => {
   if (!isAdmin) {
     redirect("/");
   }
+
   return (
     <section className="w-full rounded-2xlbg-white p-7">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -33,7 +34,7 @@ const page = async () => {
         </Button>
       </div>
       <div className="mt-7 w-full overflow-hidden">
-        <p>Table</p>
+        <DataTableDemo />
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
+
   const session = await auth();
   if (!session?.user?.id) {
     redirect("/sign-in");
@@ -23,6 +24,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
   if (!isAdmin) {
     redirect("/");
   }
+
   return (
     <main className="flex min-h-screen w-full flex-row">
       <Sidebar session={session} />
